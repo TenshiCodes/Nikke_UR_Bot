@@ -52,7 +52,7 @@ class unionraidFuncs:
         return user
     
     async def get_hit(self, boss_name:str, day:str) -> List[Any]:
-        return await self._db.execute(f"SELECT userID FROM union_raid Where boss_name = %s AND day = %s",(boss_name,day), fetch="all")
+        return await self._db.execute(f"SELECT userID FROM {TABLE_NAME} Where boss_name = %s AND day = %s",(boss_name,day), fetch="all")
         
     async def add_hitter(self, user: discord.Member) -> None:
         data = await self._db.execute(f"SELECT * FROM {TABLE_NAME} WHERE userID = %s", (user.id,), fetch="all")

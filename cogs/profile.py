@@ -186,7 +186,7 @@ class profile(commands.Cog):
             
     @commands.command(aliases=["strike","so"], usage=f"<team*: int> <member*: @member>", description="Coordinators are able to Specify which team has been used for a member by using @")
     @commands.guild_only()
-    @commands.has_role("Carnage Coordinator")
+    @commands.has_role("Coordinator")
     async def use(self,ctx: commands.Context, team: int, member:discord.Member = None):
         """Checks to make sure its not in a specific channel. Reads which team # from args and sends to database to change
         that respected column. Deletes the responses at the end.
@@ -217,7 +217,7 @@ class profile(commands.Cog):
                            
     @commands.command(aliases=["c"], usage=f"<member*: @member>", description="Coordinators are able to clear ALL users team by using @")
     @commands.guild_only()
-    @commands.has_role("Carnage Coordinator")
+    @commands.has_role("Coordinator")
     async def clear(self,ctx: commands.Context, member:discord.Member = None):
         """Checks to make sure its not in a specific channel. Clears ALL user's teams by sending their userID to database.
         sends embed when action is completed.
@@ -241,7 +241,7 @@ class profile(commands.Cog):
     
     @commands.command(aliases=["tc","tcheck"], usage=f"", description="Coordinators are able to check which teams have not been used")
     @commands.guild_only()
-    @commands.has_role("Carnage Coordinator")
+    @commands.has_role("Coordinator")
     async def teamcheck(self, ctx: commands.Context):
         """
         Checks to make sure it's not in a specific channel. Checks from the database which user has not used their respective teams and gets returned.
@@ -418,7 +418,7 @@ class profile(commands.Cog):
         
     @commands.command(aliases=["def"],usage=f"", description="Sets everyones teams to default. non-used.")
     @commands.guild_only()
-    @commands.has_role("Carnage Coordinator")                              
+    @commands.has_role("Coordinator")                              
     async def default(self,ctx: commands.Context):
         """Checks to make sure its not in a specific channel. Checks database to switch st1 st2 st3 column to default which is 'n'.
         this distinguishes which teams are in use and sets them back to not in use.

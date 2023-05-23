@@ -41,7 +41,7 @@ class union_raid(commands.Cog):
         
     @commands.command(aliases=["a"], usage=f"<Account*: Member Name> <Damage*: int>", description="Coordinator can send data to the CURRENT GOOGLE SHEET. all you need is the Name and Damage. Example: Tenshi 501928929")
     @commands.guild_only()
-    @commands.has_role("Carnage Coordinator")
+    @commands.has_role("Coordinator")
     async def add(self, ctx: commands.Context, account: str, damage: int):
         """Checks to make sure its not in a specific channel. This appends data to the Google Sheets using a view. Args need to be provided.
         Args:
@@ -71,7 +71,7 @@ class union_raid(commands.Cog):
     
     @commands.command(aliases=["se","upl","upload"], usage=f"",description="Select a sheet by Name that the bot is in\ntenshibot@impactful-facet-385622.iam.gserviceaccount.com\n")
     @commands.guild_only()
-    @commands.has_role("Carnage Coordinator")
+    @commands.has_role("Coordinator")
     async def select(self, ctx):
         """Selects the google sheet for Configs. puts the name in self.sheeetName and uploads the name to database.
         Goes through Config worksheet and looks at the bosses. puts them in the boss_list and responds with an embed.
@@ -157,7 +157,7 @@ class union_raid(commands.Cog):
             member (discord.Member, optional): user's ID or discord tag. Defaults to None.
         """
         if ctx.channel.id != 1052240945032220732:
-            desired_role_name = "Carnage Coordinator"
+            desired_role_name = "Coordinator"
             desired_role = discord.utils.get(ctx.author.roles, name=desired_role_name)
             if not self.boss_list and desired_role is not None:
                 await self.select(ctx)
@@ -373,7 +373,7 @@ class union_raid(commands.Cog):
 
     @commands.command(aliases=["u","unleash"], usage=f"<day*: integer or string> <all*: all> <member: @member>", description="Clear all hitters and notify those that are opt-in") #function needs to be changed for boss_name // needs to auto_get
     @commands.guild_only()
-    @commands.has_role("Carnage Coordinator")
+    @commands.has_role("Coordinator")
     async def unleashed(self, ctx: commands.Context, day: str, all: str = None, member: discord.Member = None,):
         """Checks to make sure its not in a specific channel. Checks day arg and sorts it to respective worksheet(sheet_name). Looks into database to make sure it
         has the latest sheet(sheetName). Grabs headers from google sheet. Grabs all values. Combines them and puts them in a 2 Pandas DataFrames. Drops all empty values,
@@ -487,7 +487,7 @@ class union_raid(commands.Cog):
     
     @commands.command(aliases=["d","del","remove","rmve"], usage=f"<day*: integer or string> <member: @member>", description="Deletes one hitter from the list '&start' then notifies if opt-in") #function needs to be changed for boss_name // needs to auto_get
     @commands.guild_only()
-    @commands.has_role("Carnage Coordinator")
+    @commands.has_role("Coordinator")
     async def delete(self, ctx: commands.Context,day: str, member: discord.Member = None):
         """Checks to make sure its not in a specific channel. Checks day arg and sorts it to respective worksheet(sheet_name). Looks into database to make sure it
         has the latest sheet(sheetName). Grabs headers from google sheet. Grabs all values. Combines them and puts them in a 2 Pandas DataFrames. Drops all empty values,
@@ -592,7 +592,7 @@ class union_raid(commands.Cog):
               
     @commands.command(aliases=["r","res"], usage=f"None", description="WARNING: RESETS EVERYTHING. DO AT YOUR OWN RISK")
     @commands.guild_only()
-    @commands.has_role("Carnage Coordinator")
+    @commands.has_role("Coordinator")
     async def reset(self, ctx: commands.Context):
         """Checks to make sure its not in a specific channel. Drops database tables. Clears notifications,boss information, and googlesheet info.
         Recreates the tables that were dropped.
