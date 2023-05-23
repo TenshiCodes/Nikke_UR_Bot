@@ -1,0 +1,29 @@
+Mod:Modernia
+Xrupee:Winter Shopper Rupee
+mw:Maxwell
+Priv:Privaty
+Rap:Rapunzel
+Rapu:Rapunzel
+Scar:Scarlet
+sw:Snow White
+Snow:Snow White
+Xanne:Miracle Fairy Anne
+Doro:Dorothy
+Nihi:Nihilister
+Nihil:Nihilister
+Guil:Guillotine
+Guill:Guillotine
+Folk:Folkwang
+fw:Folkwang
+Lap:Laplace
+Lud:Ludmilla
+B3:Burst3
+smg:Submachinegun
+mg:Machinegun
+ar:AssaultRifle
+sg:Shotgun
+rl:RocketLauncher
+Snow White:Snow white
+Dora:Dolla
+Raplace:Laplace
+Rita:Liter
