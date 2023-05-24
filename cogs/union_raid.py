@@ -493,6 +493,7 @@ class union_raid(commands.Cog):
             member (discord.Member, optional): user's ID or discord tag. Defaults to authors ID.
         """
         if ctx.channel.id != 1052240945032220732:
+            user = member or ctx.author
             em = discord.Embed(
                 title=f"",
                 description=f"deleted {user}'s previous hit!",
@@ -501,7 +502,6 @@ class union_raid(commands.Cog):
             )
             em.set_footer(text=f"{ctx.guild.name}")
             await ctx.reply(em)
-            user = member or ctx.author
             if day == "1":
                 sheet_name = 'Hits D1'
             elif day == "2":
