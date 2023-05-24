@@ -38,12 +38,15 @@ class Help(commands.Cog):
                     "UR Commands": ["start", "hitter", "boss", "notify"],
                     "Profile Commands": ["profile", "setteam"]
                 },
-                "__Carnage Coordinators__": {
-                    "UR Commands": ["select", "unleashed", "delete", "add", "reset"],
-                    "Profile Commands": ["teamcheck", "use", "default", "clear"]
+                "__Coordinators__": {
+                    "UR Commands": ["unleashed", "delete", "add"],
+                    "Profile Commands": ["teamcheck", "use", "default"]
                 },
                 "__PVP Menu__": {
                     "Profile Commands": ["pvp", "pvpteam"]
+                },
+                "__Admin/Mods__": {
+                    "Commands":["select", "clear", "reset"]
                 },
             }
             for category, subcategories in categories.items():
@@ -62,7 +65,7 @@ class Help(commands.Cog):
                     if category_list:
                         em.add_field(name=category, value="\n\n".join(category_list), inline=False)
             em.description = f"Bot prefix is {Auth.COMMAND_PREFIX}\n**Make sure to share Google Sheet with**\n" \
-                            "tenshibot@impactful-facet-385622.iam.gserviceaccount.com\n*__Run command &check to see configs__*\n"
+                            "ENTER YOUR BOT NAME EMAIL HERE m\n*__Run command &check to see configs__*\n"
             await ctx.reply(embed=em)
 
 def setup(client):
