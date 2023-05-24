@@ -40,7 +40,11 @@ Discord Bot that can save Teams for Union members, Data acquisition for Google S
   <br>
   
 # Things to change in the code
-
+1.First thing to change is the .env file. TOKEN,COMMAND_PREFIX,DB_HOST,DB_PORT,DB_USER,DB_PASSWD,DB_NAME
+2.In main.py, union_raid.py, and profile.py: Change all user.id's and channel.id's. Change name_mappings.txt and characters.txt path in profile.py<br>
+3.Change the .json file with your path to your key from setting up Google API. The place to replace it is in union_raid.py<br>
+4.If you changed Tab Names in the google sheet. Change anything associated with the day and DataFrames from pandas to the respective columns or names. This should be in union_raid.py<br>
+5.If you adjust the Google Sheet. Check the Views, menu.py. to adjust for anything you have changed.<br>
 # How to set up a service
 Assuming that you are in Linux, (which you should be)....To set up a service so that your code auto-starts due to any power off/unexpected crash you should set up a service<br>
 To do this follow this format: <br>
@@ -62,7 +66,10 @@ To do this follow this format: <br>
      Restart=always
 
      [Install]
-     WantedBy=multi-user.target`   
+     WantedBy=multi-user.target
+    
+    
+    `   
 
 # Packages
 
