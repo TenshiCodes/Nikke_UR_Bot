@@ -32,7 +32,7 @@ class profile(commands.Cog):
         Returns:
             _type_: async def function
         """
-        if ctx.channel.id != 1052240945032220732:   
+        if ctx.channel.id != 1052240945032220732: #we check to make sure its not in the pvp channel so that command doesnt get initiated
             user = ctx.author
             team = []
             team2 = []

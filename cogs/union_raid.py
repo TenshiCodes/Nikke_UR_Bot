@@ -49,11 +49,11 @@ class union_raid(commands.Cog):
             account (str): passing account arg. This should be the name/account that is in Google Sheets
             damage (str): passing damage # arg. This should be the damage# that will be in Google Sheets
         """
-        if ctx.channel.id != 1052240945032220732:
+        if ctx.channel.id != 1052240945032220732: #we check to make sure its not in the pvp channel so that command doesnt get initiated
             try:
                 dsheet = await self.gsheet.use()
                 self.sheetName[0] = dsheet[0]
-                sheet=gc.open(self.sheetName[0]).worksheet("Config")#"Copy of Nikke Union raid" #Config
+                sheet=gc.open(self.sheetName[0]).worksheet("Config")#"GOOGLE SHEET NAME" #Config TAB
                 if sheet is not None:
                     sheetName = self.sheetName
                     view = MyMenu(self, account, damage, sheetName)
@@ -164,7 +164,7 @@ class union_raid(commands.Cog):
             else:
                 if boss_name in self.boss_list:
                     user = member or ctx.author
-                    channel_id = 1108865038799876177
+                    channel_id = 1108865038799876177 #channel id for boss ping/notifications
                     channel = ctx.guild.get_channel(channel_id)
                     await self.notifs.store(boss_name, user.id, channel_id)
                     await ctx.send(f"{user.mention}, you will be notified in {channel.mention} when {boss_name} is up!")
@@ -196,6 +196,8 @@ class union_raid(commands.Cog):
                 sheet_name = 'Hits D1'
             elif day == 2:
                 sheet_name = 'Hits D2'
+            # elif day =="3":
+            #     sheet_name = 'Hits D3' #this should be the name of the google sheet TAB.
             try:
                 dsheet = await self.gsheet.use()
                 self.sheetName[0] = dsheet[0]
@@ -257,15 +259,14 @@ class union_raid(commands.Cog):
         """        
         if ctx.channel.id != 1052240945032220732:
             user = member
-            channel = ctx.channel
-            channel_id = 1108865038799876177
-
-            user_av = user.display_avatar or user.default_avatar
-
+            # channel = ctx.channel
+            channel_id = 1108865038799876177 #channel for boss pings/notifications
             if day == "1":
                 sheet_name = 'Hits D1'
             elif day == "2":
                 sheet_name = 'Hits D2'
+            # elif day =="3":
+            #     sheet_name = 'Hits D3' #this should be the name of the google sheet TAB.
             try:
                 dsheet = await self.gsheet.use()
                 self.sheetName[0] = dsheet[0]
@@ -286,11 +287,9 @@ class union_raid(commands.Cog):
             dataFrame = dataFrame.dropna(axis=1, how='all')
             dataFrame = dataFrame.dropna(subset=['Account'])
             boss_name = dataFrame.iloc[-2]['Full boss name'] #boss_name
-            users = await self.pr3.get_hit(boss_name, day) #all hitters under that specific boss
+            # users = await self.pr3.get_hit(boss_name, day) #all hitters under that specific boss
             await self.pr3.add_boss(boss_name, day, user.id)
-
-            hitters = await self.pr3.hitters(user.id,boss_name, day)
-
+            # hitters = await self.pr3.hitters(user.id,boss_name, day)
             em = embed( f"added {member}: {boss_name} to Day:{day}\n")
             await ctx.reply(em)
             matching_boss = None
@@ -328,6 +327,8 @@ class union_raid(commands.Cog):
                 sheet_name = 'Hits D1'
             elif day == "2":
                 sheet_name = 'Hits D2'
+            # elif day =="3":
+            #     sheet_name = 'Hits D3' #this should be the name of the google sheet TAB.
             try:
                 dsheet = await self.gsheet.use()
                 self.sheetName[0] = dsheet[0]
@@ -387,11 +388,12 @@ class union_raid(commands.Cog):
         """
         if ctx.channel.id != 1052240945032220732:
             user = member or ctx.author
-            user_av = user.display_avatar or user.default_avatar
             if day == "1":
                 sheet_name = 'Hits D1'
             elif day == "2":
                 sheet_name = 'Hits D2'
+            # elif day =="3":
+            #     sheet_name = 'Hits D3' #this should be the name of the google sheet TAB.
             try:
                 dsheet = await self.gsheet.use()
                 self.sheetName[0] = dsheet[0]
@@ -413,16 +415,13 @@ class union_raid(commands.Cog):
             df2['Account'] = df2['Account'].str.strip()
             df2['Account'] = df2['Account'].replace('', np.nan)
             df2 = df2.dropna(subset=['Account'])
-
-            
-            
             dataFrame.columns = headers
             dataFrame = dataFrame.dropna(how='all')
             dataFrame = dataFrame.loc[:, ~dataFrame.columns.duplicated()]
             dataFrame = dataFrame.dropna(axis=1, how='all')
             dataFrame = dataFrame.dropna(subset=['Account'])
             boss_name = dataFrame.iloc[-2]['Full boss name'] #boss_name
-            users = await self.pr3.get_hit(boss_name, day) #all hitters under that specific boss
+            # users = await self.pr3.get_hit(boss_name, day) #all hitters under that specific boss
             if all == "all":
                 await self.pr3.deleteall()
                 em = discord.Embed(
@@ -433,13 +432,9 @@ class union_raid(commands.Cog):
                 )
                 em.set_footer(text=f"{ctx.guild.name}")
                 await ctx.reply(em)
-                
-            user_av = user.display_avatar or user.default_avatar
-            if user.bot:
-                return await ctx.reply(error_embed("Bot's don't have account genius"))
             await self.pr3.ur_open(user)
             #when removing a user check if the boss is the same and if it isnt update the event notification
-            users = await self.pr3.get_ur(user)
+            # users = await self.pr3.get_ur(user)
             await self.pr3.delete_hitter(user.id,boss_name, day)
             if len(df2) >= 2:
                 Last = df2.iloc[-2]['Next boss?']
@@ -456,13 +451,13 @@ class union_raid(commands.Cog):
                 "b5": self.boss_list[4]
             }
             #boss_associations['b1'] will return 'Vulcan'.
-            boss_associations2 = {
-                self.boss_list[0]: "b1",
-                self.boss_list[1]: "b2",
-                self.boss_list[2]: "b3",
-                self.boss_list[3]: "b4",
-                self.boss_list[4]: "b5"
-            }
+            # boss_associations2 = {
+            #     self.boss_list[0]: "b1",
+            #     self.boss_list[1]: "b2",
+            #     self.boss_list[2]: "b3",
+            #     self.boss_list[3]: "b4",
+            #     self.boss_list[4]: "b5"
+            # }
             # Find the matching boss name for Last2
             matching_boss = None
 
@@ -478,7 +473,6 @@ class union_raid(commands.Cog):
                 next_value = self.boss_list[index + 1] if index + 1 < len(self.boss_list) else None
             else:
                 print("Search value not found in the list.")
-
             current_boss = Last
             if current_boss == "TRUE":
                 await self.event3(ctx, search_value)
@@ -499,16 +493,25 @@ class union_raid(commands.Cog):
             member (discord.Member, optional): user's ID or discord tag. Defaults to authors ID.
         """
         if ctx.channel.id != 1052240945032220732:
+            em = discord.Embed(
+                title=f"",
+                description=f"deleted {user}'s previous hit!",
+                color=BotSettings.EMBED_COLOR,
+                timestamp=datetime.now()
+            )
+            em.set_footer(text=f"{ctx.guild.name}")
+            await ctx.reply(em)
             user = member or ctx.author
-            user_av = user.display_avatar or user.default_avatar
             if day == "1":
                 sheet_name = 'Hits D1'
             elif day == "2":
-                sheet_name = 'Hits D2'
+                sheet_name = 'Hits D2' #THIS IS FOR ONLY TWO DAYS OF UNION RAID. FOR MORE DAYS ADD MORE ELIF'S EXAMPLE IS COMMENTED
+            # elif day =="3":
+            #     sheet_name = 'Hits D3' #this should be the name of the google sheet TAB.
             try:
                 dsheet = await self.gsheet.use()
                 self.sheetName[0] = dsheet[0]
-                sheet=gc.open(self.sheetName[0]).worksheet(sheet_name)#"Copy of Nikke Union raid" #Config
+                sheet=gc.open(self.sheetName[0]).worksheet(sheet_name)#"GOOGLE SHEET NAME" #Config TAB
             except gspread.exceptions.SpreadsheetNotFound:
                 em = embed( f"Bot is not in spreadsheet, make sure everything is spelled correctly, this is also case-sensitive!"
                         )
@@ -526,12 +529,9 @@ class union_raid(commands.Cog):
             dataFrame = dataFrame.dropna(axis=1, how='all')
             dataFrame = dataFrame.dropna(subset=['Account'])
             boss_name = dataFrame.iloc[-2]['Full boss name'] #boss_name current
-            users = await self.pr3.get_hit(boss_name, day) #all hitters under that specific boss
-            
-            if user.bot:
-                return await ctx.reply(error_embed("Bot's don't have account smart one"))
+            # users = await self.pr3.get_hit(boss_name, day) #all hitters under that specific boss
             await self.pr3.ur_open(user)
-            users = await self.pr3.get_ur(user)
+            # users = await self.pr3.get_ur(user)
             await self.pr3.delete_hitter(user.id,boss_name, day)
             dataFrame = dataFrame.dropna(subset=['Account'])
             dataFrame['Account'] = dataFrame['Account'].str.strip()
@@ -543,11 +543,9 @@ class union_raid(commands.Cog):
             df2 = df2.dropna(subset=['Account'])
             df2['Account'] = df2['Account'].str.strip()
             df2['Account'] = df2['Account'].replace('', np.nan)
-            
-            
-            boss_data = dataFrame.iloc[-2]['Full boss name']
+            # boss_data = dataFrame.iloc[-2]['Full boss name']
             bd = dataFrame.iloc[-2]['Next boss?']
-            all = "all"
+            # all = "all"
             matching_boss = None
             # Iterate over the boss_associations dictionary
             for key, value in self.boss_associations.items():
@@ -565,30 +563,6 @@ class union_raid(commands.Cog):
                 print("Have not configured the sheet")
                 # Handle the case when there are not enough rows in the DataFrame
                 # Print an error message or perform an alternative action
-            Last2 = dataFrame.iloc[-2]['Full boss name']
-            em = discord.Embed(
-                title=f"",
-                description=f"deleted {user}'s previous hit!",
-                color=BotSettings.EMBED_COLOR,
-                timestamp=datetime.now()
-            )
-            em.set_footer(text=f"{ctx.guild.name}")
-            await ctx.reply(em)
-            boss_associations = {
-                "b1": self.boss_list[0],
-                "b2": self.boss_list[1],
-                "b3": self.boss_list[2],
-                "b4": self.boss_list[3],
-                "b5": self.boss_list[4]
-            }
-            #boss_associations['b1'] will return 'Vulcan'.
-            boss_associations2 = {
-                self.boss_list[0]: "b1",
-                self.boss_list[1]: "b2",
-                self.boss_list[2]: "b3",
-                self.boss_list[3]: "b4",
-                self.boss_list[4]: "b5"
-            }
               
     @commands.command(aliases=["r","res"], usage=f"None", description="WARNING: RESETS EVERYTHING. DO AT YOUR OWN RISK")
     @commands.guild_only()
