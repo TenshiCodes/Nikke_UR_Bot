@@ -28,6 +28,8 @@ Discord Bot that can save Teams for Union members, Data acquisition for Google S
 
 # Things to change in the code
 
+# How to set up a service
+
 # Packages
 
 
