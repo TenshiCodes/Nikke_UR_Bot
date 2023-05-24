@@ -34,7 +34,9 @@ Discord Bot that can save Teams for Union members, Data acquisition using Google
   If you would like to avoid that please include these tabs into your Google Sheet with the respected columns<br>
   __Tabs needed:__ **[Config] [Accounts] and [Hits D1]** <--- this can be changed to [UnionRaid] or [Day 1] ...etc. <br>
   Here are some examples below:<br>
+  ![Example of Accounts and Google Sheets Tabs!](https://i.gyazo.com/c2cb86b6e754b593b2cf51bf4f663cca.png) "Notice the Tab Names above"
   <br>
+  ![Example of Column Names!](https://i.gyazo.com/5b6cefe979f5271909d2de34e9851e6d.png)
   <br>
   <br>
   <br>
