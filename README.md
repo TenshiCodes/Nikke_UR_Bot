@@ -50,33 +50,43 @@ Discord Bot that can save Teams for Union members, Data acquisition using Google
   
   
 # How to set up a service
-Assuming that you are in Linux, (which you should be)....To set up a service so that your code auto-starts due to any power off/unexpected crash you should set up a service<br>
-To do this follow this format: <br>
-  <t>Create a file in the /etc/systemd/system folder with sudo su.<br>
-    Name it nikke.service or nikke_bot.service<br>
- __The following should be in the file:__<br>
-     `
-    
-    
-     [Unit]
-     Description=Nikke UR Bot
-     After=multi-user.target
+<p>Assuming that you are in Linux (which you should be), follow these steps to set up a service that auto-starts your code in case of power off or unexpected crashes:</p>
 
-     [Service]
-     User="YOUR USERNAME FOR THE SYSTEM"
-     Type=idle
-     WorkingDirectory=/PATH/TO/Nikke_UR_Bot
-     ExecStart=/usr/bin/python /PATH/TO/Nikke_UR_Bot/main.py
-     Restart=always
+<ol>
+  <li>Create a file in the <code>/etc/systemd/system</code> folder with <code>sudo su</code>. Name it <code>nikke.service</code> or <code>nikke_bot.service</code>.</li>
+  
+  <p><strong>The following should be in the file:</strong></p>
+  
+  <pre><code>[Unit]
+Description=Nikke UR Bot
+After=multi-user.target
 
-     [Install]
-     WantedBy=multi-user.target
-    
-    
-    `   
+[Service]
+User="YOUR USERNAME FOR THE SYSTEM"
+Type=idle
+WorkingDirectory=/PATH/TO/Nikke_UR_Bot
+ExecStart=/usr/bin/python /PATH/TO/Nikke_UR_Bot/main.py
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+  </code></pre>
+
+  <li>Don't forget to run the following commands:</li>
+  <ul>
+    <li><code>sudo systemctl enable nikke.service</code></li>
+    <li><code>sudo systemctl start nikke.service</code></li>
+  </ul>
+</ol>
 
 # Packages
-
+  </li></li>
+    To install the packages required for this discord bot.<br>
+  
+  **Use this command in terminal:**
+  `pip install -r packages.txt` <br>
+  You must be in the same directory as Nikke_UR_Bot folder<br>
+  To view the packages go to ----> [Packages](https://github.com/TenshiCodes/Nikke_UR_Bot/blob/master/packages.txt)
 
 
 
