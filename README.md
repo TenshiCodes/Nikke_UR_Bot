@@ -23,12 +23,46 @@ Discord Bot that can save Teams for Union members, Data acquisition for Google S
 
 
 # How to set up Google API
-
+<t>**Visit:** https://console.cloud.google.com/ <br>
+  __Sign up__ and go to Service Accounts: [Service Accounts](https://console.cloud.google.com/iam-admin/serviceaccounts) <br>
+  __Create__ a service account. Then go to Actions of that Service account click Manage Keys.<br>
+  __Click Add Key__. Create a new key. This will then give you a .json file with information you need for your code.<br>
+  Also dont forget to __install__ [GoogleSheetAPI Install](https://console.cloud.google.com/apis/api/sheets.googleapis.com/) and [GoogleDriveAPI Install](https://console.cloud.google.com/apis/api/drive.googleapis.com/) <br>
+  
 # How to set up the Google Sheet
-
+<t>Ideally you can set up the Google sheet how you want but might have to redo most of the code that is in union_raid.py<br>
+  If you would like to avoid that please include these tabs into your Google Sheet with the respected columns<br>
+  __Tabs needed:__ **[Config] [Accounts] and [Hits D1]** <--- this can be changed to [UnionRaid] or [Day 1] ...etc. <br>
+  Here are some examples below:<br>
+  <br>
+  <br>
+  <br>
+  <br>
+  
 # Things to change in the code
 
 # How to set up a service
+Assuming that you are in Linux, (which you should be)....To set up a service so that your code auto-starts due to any power off/unexpected crash you should set up a service<br>
+To do this follow this format: <br>
+  <t>Create a file in the /etc/systemd/system folder with sudo su.<br>
+    Name it nikke.service or nikke_bot.service<br>
+ __The following should be in the file:__<br>
+     `
+    
+    
+     [Unit]
+     Description=Nikke UR Bot
+     After=multi-user.target
+
+     [Service]
+     User="YOUR USERNAME FOR THE SYSTEM"
+     Type=idle
+     WorkingDirectory=/PATH/TO/Nikke_UR_Bot
+     ExecStart=/usr/bin/python /PATH/TO/Nikke_UR_Bot/main.py
+     Restart=always
+
+     [Install]
+     WantedBy=multi-user.target`   
 
 # Packages
 
