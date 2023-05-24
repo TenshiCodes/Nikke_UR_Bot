@@ -1,5 +1,5 @@
 # Nikke_UR_Bot
-Discord Bot that can save Teams for Union members, Data acquisition for Google Sheets. Notifications for Union Raid
+Discord Bot that can save Teams for Union members, Data acquisition using Google Sheets and Discord interactions. Notifications for Union Raid
 
 # Commands
 **-start:** command to be put in the list for the current boss<br>
