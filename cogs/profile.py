@@ -264,41 +264,33 @@ class profile(commands.Cog):
             em.set_footer(text=ctx.guild.name)
 
             # Team 1
-            em.add_field(name="__T1__", value="", inline=False)
-            for i, user_id in enumerate(data):
-                member_name = self.client.get_user(int(user_id[0]))
-                if member_name is None:
-                    member_name = f"User ID {user_id[0]}"
-                em.add_field(name=f"**{i+1}.**\t {member_name}", value=f"", inline=False)
-
+            em.add_field(name="__T1__", value=self.get_member_names(data), inline=False)
             pages.append(em)
             em = discord.Embed(title="Team Check", color=BotSettings.EMBED_COLOR, timestamp=datetime.now())
             em.set_footer(text=ctx.guild.name)
 
             # Team 2
-            em.add_field(name="__T2__", value="", inline=False)
-            for i, user_id in enumerate(data2):
-                member_name = self.client.get_user(int(user_id[0]))
-                if member_name is None:
-                    member_name = f"User ID {user_id[0]}"
-                em.add_field(name=f"**{i+1}.**\t {member_name}", value=f"", inline=False)
-
+            em.add_field(name="__T2__", value=self.get_member_names(data2), inline=False)
             pages.append(em)
             em = discord.Embed(title="Team Check", color=BotSettings.EMBED_COLOR, timestamp=datetime.now())
             em.set_footer(text=ctx.guild.name)
 
             # Team 3
-            em.add_field(name="__T3__", value="", inline=False)
-            for i, user_id in enumerate(data3):
-                member_name = self.client.get_user(int(user_id[0]))
-                if member_name is None:
-                    member_name = f"User ID {user_id[0]}"
-                em.add_field(name=f"**{i+1}.**\t {member_name}", value=f"", inline=False)
-
+            em.add_field(name="__T3__", value=self.get_member_names(data3), inline=False)
             pages.append(em)
 
             # Call the embed_pages function to handle pagination
             await self.embed_pages(ctx, pages)
+
+    def get_member_names(self, data):
+        member_names = []
+        for i, user_id in enumerate(data):
+            member = self.client.get_user(int(user_id[0]))
+            if member is not None:
+                member_names.append(f"**{i+1}.**\t {member.name}")
+            else:
+                member_names.append(f"**{i+1}.**\t User ID {user_id[0]}")
+        return "\n".join(member_names)
 
     async def embed_pages(self, ctx, pages):
         current_page = 0
